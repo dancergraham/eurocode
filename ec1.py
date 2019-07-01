@@ -8,6 +8,7 @@ By Graham Knapp
 """
 
 rho = 1.25  # density kg/m3 from base Eurocode
+_document = 'EN 1991-1-4:2005 +A1:2010'
 
 
 class Site():
@@ -23,12 +24,12 @@ class Site():
 
     zmin_by_terrain = {'O': 1., 'I': 1., 'II': 2., 'III': 5., 'IV': 10.}
 
-    def __init__(self, vb, terrain, co=1.0):
-        self.vb = vb
-        self._terrain = terrain
-        self._z0 = self.z0_by_terrain[terrain]
-        self._zmin = self.zmin_by_terrain[terrain]
-        self._co = co
+    def __init__(self, vb0, terrain, co=1.0):
+        self.vb0 = vb0                              # fundamental value of the basic wind velocity in m/s
+        self._terrain = terrain                     # terrain category
+        self._z0 = self.z0_by_terrain[terrain]      # roughness length in m
+        self._zmin = self.zmin_by_terrain[terrain]  # minimum height in m
+        self._co = co                               # orography factor
 
     def iu(self, z):
         """Calclate turbulence intensity at a given height z
@@ -45,7 +46,7 @@ class Site():
     def qp(self, z):
         """Calculate peak wind velocity pressure in Pa at a given height
         """
-        u = self.cr(z) * self.vb
+        u = self.cr(z) * self.vb0
         _qp = 0.5 * rho * (u ** 2.) * (1 + 7 * self.iu(z))
         return _qp
 
