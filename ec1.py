@@ -1,7 +1,8 @@
 # import numpy as np
 from math import log
 
-"""Structural wind loading according to Eurocode EN 1991-1-4:2005. 
+"""
+Structural wind loading according to Eurocode EN 1991-1-4:2005. 
 Initial proof of concept of an OOP approach using Python. 
 By Graham Knapp
 """
