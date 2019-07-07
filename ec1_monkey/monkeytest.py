@@ -1,5 +1,5 @@
 import ec1
-from ec1 import NA_FR
+from ec1 import NA_FR # monkey patch with French national annexe
 
 # TODO: Refactor with pytest.
 
